@@ -1,0 +1,36 @@
+Nokogiriを使用するためには、
+open-url　nokogiriのライブラリがいる
+open-urlは標準
+gem install nokogiri
+
+require 'nokogiri'
+require 'open-uri'
+
+# 対象のURL
+url = "https://www.sejuku.net/blog/"
+
+# NokogiriでURLの情報を取得する
+contents = Nokogiri::HTML(open(url),nil,"utf-8")
+
+puts contents
+
+NokogiriではXPathやCSSセレクタで要素を取得できる。
+# CSSセレクタはこんなかんじ
+doc.css('#main > article> h1')
+# XPathはこんなかんじ
+doc.xpath('//*[@id="main"]/article/h1')
+
+ID指定
+element_h1 = html.css('#hoge_id')
+クラス名指定
+element_h1 = html.css('.hoge_class')
+指定ID配下の指定クラス
+element_h1 = html.css('#hoge_id .hoge_class')
+隣りの要素を指定
+element_h1 = html.css('h1+h2')
+指定IDを持つ要素
+element_h1 = html.css('h1:has(#hoge_id)')
+指定IDを持つ要素の隣りの要素を指定
+element_h1 = html.css('h1:has(#hoge_id)+h2')
+または　or
+element_h1 = html.css('h1, h2')
